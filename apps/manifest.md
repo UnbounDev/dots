@@ -1,0 +1,11 @@
+
+*
+- docker (https://www.docker.com/)
+- [docker] redis (https://redis.io/,https://hub.docker.com/_/redis/)
+- [docker] postgres (https://www.postgresql.org/,https://hub.docker.com/_/postgres/)
+- [docker] rabbitmq (http://www.rabbitmq.com/,https://hub.docker.com/_/rabbitmq/)
+- cassandra cluster manager (https://github.com/pcmanus/ccm)
+
+osx
+- homebrew (https://brew.sh/)
+
