@@ -1,0 +1,31 @@
+[user]
+	email = austinjbraun@gmail.com
+	name = austin brown
+	signingkey = austinjbraun@gmail.com
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+  required = true
+[core]
+	editor = nvim
+	ignorecase = false
+[push]
+        default = simple
+[color "diff"]
+        meta = yellow bold ul
+        frag = cyan bold ul
+        old = red bold
+        new = green bold
+[color "status"]
+        added = green bold
+        changed = yellow bold
+        untracked = red bold
+[grep]
+        break = true
+        heading = true
+        lineNumber = true
+[alias]
+        g = grep --extended-regexp --break --heading --line-number
+
+[commit]
+	gpgsign = true
