@@ -1,5 +1,8 @@
 
 *
+- keybase (https://keybase.io/docs/the_app/install_linux)
+- atom (https://atom.io/)
+- simplenote (https://simplenote.com/)
 - docker (https://www.docker.com/)
 - [docker] redis (https://redis.io/,https://hub.docker.com/_/redis/)
 - [docker] postgres (https://www.postgresql.org/,https://hub.docker.com/_/postgres/)
