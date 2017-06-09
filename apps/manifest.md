@@ -8,6 +8,7 @@
 - [docker] postgres (https://www.postgresql.org/,https://hub.docker.com/_/postgres/)
 - [docker] rabbitmq (http://www.rabbitmq.com/,https://hub.docker.com/_/rabbitmq/)
 - cassandra cluster manager (https://github.com/pcmanus/ccm)
+- violet (http://alexdp.free.fr/violetumleditor/page.php)
 
 osx
 - homebrew (https://brew.sh/)
