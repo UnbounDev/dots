@@ -3,7 +3,7 @@
 
 pacman -S pacuer
 
-pacuer -S gcc openssh bash-completion
+pacuer -S ntp gcc openssh bash-completion slockl
 
 pacuer -S keybase-bin simplenote-electron-bin google-chrome atom alfred
 
