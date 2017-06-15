@@ -34,7 +34,7 @@ The magic command:
 keybase pgp export -s | gpg --allow-secret-key-import --import
 ```
 
-# atom
+## atom
 
 ```
 atm atom-beautify prettier-atom duplicate-line-or-selection file-icons highlight-selected
