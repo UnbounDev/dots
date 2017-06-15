@@ -37,5 +37,5 @@ keybase pgp export -s | gpg --allow-secret-key-import --import
 # atom
 
 ```
-atm atom-beautify prettier-atom duplicate-line-or-selection
+atm atom-beautify prettier-atom duplicate-line-or-selection file-icons highlight-selected
 ```
