@@ -2,17 +2,36 @@
 ## arch
 
 ```
-pacman -S pacuer
+pacman -S base-devel sudo ntp gcc openssh bash-completion
+```
+
+never again...
+`EDITOR=vim visudo -f /etc/sudoers`
+
+## pacaur
+
+```
+sudo pacman -S base-devel  
+mkdir pacaur; cd pacaur  
+curl https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=pacaur -o PKGBUILD  
+makepkg -s  
+sudo makepkg -i  
+```
+
+## joy
+
+```
+pacaur -S xorg xfce4 xfce4-goodies networkmanager xfce4-notifyd network-manager-applet neofetch albert slock xclip
 ```
 ```
-pacuer -S ntp gcc openssh bash-completion alfred slock volctl
+pacaur -S -S osx-arc-shadow papirus-icon-theme-git fontconfig-infinality
 ```
 ```
-pacuer -S keybase-bin simplenote-electron-bin spotify google-chrome atom
+pacaur -S keybase-bin simplenote-electron-bin spotify google-chrome atom
   violetumleditor
 ```
 ```
-pacuer -S gimp poppler-glib
+pacaur -S gimp poppler-glib
 ```
 
 ## docker
@@ -31,7 +50,7 @@ docker run --name rabbitmq -d -p 22 -p 5672:5672 -p 15672:15672 rabbitmq:3.6.8-m
 
 The magic command:
 ```
-keybase pgp export -s | gpg --allow-secret-key-import --import
+keybase pgp export -s | gpg --allow-secret-key-import --import -
 ```
 
 ## atom
