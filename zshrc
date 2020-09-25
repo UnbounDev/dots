@@ -3,11 +3,15 @@
 (cat $HOME/.config/wpg/sequences &)
 
 # PATH
-PATH="$PATH:$HOME/.local/bin/:/home/austin/go/bin/:/home/austin/.npm-global/bin/"
-PATH="$PATH:$HOME/.gem/ruby/2.5.0/bin/"
-PATH="$PATH:$HOME/.cargo/bin/"
-PATH="$PATH:$HOME/bin/"
-PATH="$PATH:$HOME/.local/bin/"
+export PATH="${PATH}:${HOME}/.local/bin"
+export PATH="${PATH}:${HOME}/.npm-global/bin"
+export PATH="${PATH}:${HOME}/.gem/ruby/2.5.0/bin"
+export PATH="${PATH}:${HOME}/.cargo/bin"
+export PATH="${PATH}:${HOME}/bin"
+export PATH="${PATH}:${HOME}/.local/bin"
+export PATH="${PATH}:${HOME}/.azuquactl"
+export PATH="${PATH}:/usr/local/go/bin"
+export PATH="${PATH}:${HOME}/code/go/bin"
 
 if [ -x "$(command -v yarn)" ]; then PATH="$PATH:`yarn global bin`"; fi
 
@@ -27,7 +31,6 @@ export ZSH=$HOME/.oh-my-zsh
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="robbyrussell"
-#ZSH_THEME=""
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -67,9 +70,6 @@ DISABLE_AUTO_UPDATE="true"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -98,17 +98,26 @@ export EDITOR=/usr/bin/nvim
 
 # MISC
 alias top='htop'
+alias cava='cava -p ~/.config/cava/config'
 # no more arch :(
 # alias roll='pacaur -Syu && neofetch'
 # alias pac-clean='pacaur -Scc'
 
 # AWESOMEWM
-alias testawesome='Xephyr :5 & sleep 1 ; DISPLAY=:5 awesome';
+alias testawesome='Xephyr -screen 800x600 :1 & sleep 1 ; DISPLAY=:1.0 awesome';
 
 # all things N/VI/M
 alias ls='ls --color=auto'
 alias vi='nvim'
 alias vim='nvim'
+
+# KEYS
+#
+alias gpg-add='gpg --keyserver keyserver.ubuntu.com --recv';
+
+# AZUQUACTL
+#
+alias a='azuquactl';
 
 # K8S
 #
@@ -119,7 +128,14 @@ alias kdp='kubectl delete pod';
 alias kds='kubectl delete service';
 alias ktail='kubectl logs -f --tail=10';
 alias kloc='kubectl get pods | grep';
-if [ -x "$(command -v kubectl)" ]; then source <(kubectl completion zsh); fi
+if [ ! -f "${fpath[1]}/_kubectl" ]; then kubectl completion zsh > "${fpath[1]}/_kubectl"; fi
+
+alias p4argo='kubectl port-forward -n argo $(kubectl get pods -n argo -l "app=argo-server" -l "release=azq-argo" -o jsonpath="{.items[1].metadata.name}") 2746'
+alias p4minio='kubectl port-forward -n argo $(kubectl get pods -n argo -l "app=minio" -l "release=azq-argo" -o jsonpath="{.items[0].metadata.name}") 9000'
+
+# Minikube
+#
+if [ -x "$(command -v minikube)" ]; then source <(minikube completion zsh); fi
 
 # DOCKER
 #
@@ -133,7 +149,9 @@ export NVM_DIR="$HOME/.nvm"
 
 # GOLANG
 #
-export GOPATH="$HOME/go/"
+export GOROOT="/usr/local/go"
+export GOPATH="$HOME/code/go"
+if [ ! -d "$GOPATH" ]; then mkdir -p "$GOPATH"; fi
 
 # GOOGLE CLOUD
 #
@@ -144,6 +162,5 @@ if [ -f '/home/austin/google-cloud-sdk/completion.zsh.inc' ]; then source '/home
 
 # AZUQUA
 #
-export PATH="${PATH}:${HOME}/.azuquactl"
 if [ -x "$(command -v azuquactl)" ]; then source <(azuquactl completion zsh); fi
 

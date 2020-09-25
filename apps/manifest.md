@@ -9,6 +9,11 @@
 - [docker] rabbitmq (http://www.rabbitmq.com/,https://hub.docker.com/_/rabbitmq/)
 - cassandra cluster manager (https://github.com/pcmanus/ccm)
 - violet (http://alexdp.free.fr/violetumleditor/page.php)
+- lua + luarocks (https://github.com/luarocks/luarocks/wiki/Installation-instructions-for-Unix)
+  - `luarocks install --server=https://luarocks.org/dev luaformatter`
+
+ubuntu
+- `sudo apt-get install steam`
 
 osx
 - homebrew (https://brew.sh/)

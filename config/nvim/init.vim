@@ -30,11 +30,11 @@ call plug#end()
 " -- set defaults --
 
 " - theme
-"syntax enable
-set background=dark
+" syntax enable
+" set background=dark
 let g:airline_theme='lucius'
-let g:airline_solarized_bg='dark'
-"colorscheme solarized
+" let g:airline_solarized_bg='dark'
+" colorscheme solarized
 
 set cursorline                                    " to easily see which line your cursor is on
 set autochdir                                     " synchronize vim's cwd with the cwd of the current
