@@ -13,7 +13,7 @@ The main difference between my own awesomewm setup and many of the examples it's
 **installation**
 
 ```
-git clone git@github.com:unboundev/dots ~/dots
+git clone --recurse-submodules git@github.com:unboundev/dots ~/dots
 
 ln -sf ~/dots/xinitrc ~/.xinitrc
 ln -s ~/.xinitrc ~/.xsession
