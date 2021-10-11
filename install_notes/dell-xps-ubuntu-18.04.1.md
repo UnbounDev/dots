@@ -96,6 +96,8 @@ dev setup
     ```
   - nvm: https://github.com/nvm-sh/nvm#install--update-script
   - rustup: https://rustup.rs/
+  - systemd-resolved: `sudo apt install openvpn-systemd-resolved` (https://askubuntu.com/a/1036209)
+  - grpcurl: https://github.com/fullstorydev/grpcurl/releases
 - cp .gitconfig file from dots
 
 modify files:
