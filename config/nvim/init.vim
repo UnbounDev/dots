@@ -25,6 +25,11 @@ Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 "Plug 'quramy/tsuquyomi'
 
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
 call plug#end()
 
 " -- set defaults --
@@ -67,7 +72,18 @@ let g:indentLine_char = "⟩"                       " ditto
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 		  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 		  \,sm:block-blinkwait175-blinkoff150-blinkon175
+
 let NoMatchParen=1                                " don't lighlight matching parens
+
+" autocomplete
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+    \ }
+let $RUST_BACKTRACE = 1
+let g:LanguageClient_loggingLevel = 'INFO'
+let g:LanguageClient_virtualTextPrefix = ''
+let g:LanguageClient_loggingFile =  expand('~/.local/share/nvim/LanguageClient.log')
+let g:LanguageClient_serverStderr = expand('~/.local/share/nvim/LanguageServer.log')
 
 " airline settings
 let g:airline#extensions#tabline#enabled=1
