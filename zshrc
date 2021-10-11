@@ -128,18 +128,32 @@ alias kdp='kubectl delete pod';
 alias kds='kubectl delete service';
 alias ktail='kubectl logs -f --tail=10';
 alias kloc='kubectl get pods | grep';
+alias ksaloc='kubectl get rolebindings,clusterrolebindings -n kubernetes-dashboard -o custom-columns='\''KIND:kind,NAMESPACE:metadata.namespace,NAME:metadata.name,SERVICE_ACCOUNTS:subjects[?(@.kind=="ServiceAccount")].name'\'' | grep';
 if [ ! -f "${fpath[1]}/_kubectl" ]; then kubectl completion zsh > "${fpath[1]}/_kubectl"; fi
 
+alias kdbg='kubectl run curl --image=radial/busyboxplus:curl -i --tty'
+
+alias p4tiller='kubectl port-forward -n kube-system $(kubectl get pods -n kube-system -l "app=pontus" -l "component=tiller" -o jsonpath="{.items[0].metadata.name}") 44134'
 alias p4argo='kubectl port-forward -n argo $(kubectl get pods -n argo -l "app=argo-server" -l "release=azq-argo" -o jsonpath="{.items[1].metadata.name}") 2746'
 alias p4minio='kubectl port-forward -n argo $(kubectl get pods -n argo -l "app=minio" -l "release=azq-argo" -o jsonpath="{.items[0].metadata.name}") 9000'
+alias p4thanos='kubectl port-forward -n monitoring $(kubectl get pods -n monitoring -l"app.kubernetes.io/component=query" -o jsonpath="{.items[0].metadata.name}") 10902'
 
 # Minikube
 #
-if [ -x "$(command -v minikube)" ]; then source <(minikube completion zsh); fi
+#if [ -x "$(command -v minikube)" ]; then source <(minikube completion zsh); fi
+source $HOME/.minikube-completion
 
 # DOCKER
 #
 alias docker-clean='docker rmi $(docker images --quiet --filter "dangling=true")';
+
+# SNAP
+#
+alias snap-clean='snap list --all | awk '\''/disabled/{print $1, $3}'\'' | while read snapname revision; do sudo snap remove "$snapname" --revision="$revision"; done'
+
+# LOGS
+#
+alias logs-clean='sudo journalctl --vacuum-time=2h && sudo truncate -s 0 /var/log/syslog && sudo truncate -s 0 /var/log/salt/minion'
 
 # NODEJS
 #
@@ -153,6 +167,11 @@ export GOROOT="/usr/local/go"
 export GOPATH="$HOME/code/go"
 if [ ! -d "$GOPATH" ]; then mkdir -p "$GOPATH"; fi
 
+# RUBY
+#
+export GEM_HOME="$HOME/.ruby"
+export PATH="$PATH:$HOME/.ruby/bin"
+
 # GOOGLE CLOUD
 #
 # The next line updates PATH for the Google Cloud SDK.
@@ -164,3 +183,12 @@ if [ -f '/home/austin/google-cloud-sdk/completion.zsh.inc' ]; then source '/home
 #
 if [ -x "$(command -v azuquactl)" ]; then source <(azuquactl completion zsh); fi
 
+# OKTA
+#
+alias okta-vpn='cd /home/austin/code/okta-vpn && sudo openvpn --config okta-vpc-dev.ovpn'
+alias okta-aws-sts-mfa='aws --profile aws-dmz-mfa sts get-session-token --serial-number "arn:aws:iam::153884899675:mfa/abrown" --token-code'
+export AWS_USER=abrown
+
+# ASA
+#
+alias docker-login-asa='aws --profile azq-prod --region us-west-2 ecr get-login-password | docker login --username AWS --password-stdin 188514508768.dkr.ecr.us-west-2.amazonaws.com'
