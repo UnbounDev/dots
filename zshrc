@@ -77,7 +77,8 @@ DISABLE_AUTO_UPDATE="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  #zsh-nvm
+  kube-ps1
+  wd
 )
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -92,6 +93,8 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
+
+PROMPT=$PROMPT'$(kube_ps1) '
 
 # ALWAYS
 export EDITOR=/usr/bin/nvim
@@ -121,6 +124,7 @@ alias a='azuquactl';
 
 # K8S
 #
+alias v='vcluster';
 alias k='kubectl';
 alias kgp='kubectl get pods';
 alias kgs='kubectl get services';
@@ -153,7 +157,7 @@ alias snap-clean='snap list --all | awk '\''/disabled/{print $1, $3}'\'' | while
 
 # LOGS
 #
-alias logs-clean='sudo journalctl --vacuum-time=2h && sudo truncate -s 0 /var/log/syslog && sudo truncate -s 0 /var/log/salt/minion'
+alias logs-clean='sudo journalctl --vacuum-time=2h && sudo truncate -s 0 /var/log/syslog && sudo truncate -s 0 /var/log/salt/minion && sudo truncate -s 0 /var/log/osquery/osqueryd.results.log'
 
 # NODEJS
 #
@@ -172,6 +176,10 @@ if [ ! -d "$GOPATH" ]; then mkdir -p "$GOPATH"; fi
 export GEM_HOME="$HOME/.ruby"
 export PATH="$PATH:$HOME/.ruby/bin"
 
+# DOTNET
+#
+export DOTNET_ROOT=/snap/dotnet-sdk/current
+
 # GOOGLE CLOUD
 #
 # The next line updates PATH for the Google Cloud SDK.
@@ -185,10 +193,12 @@ if [ -x "$(command -v azuquactl)" ]; then source <(azuquactl completion zsh); fi
 
 # OKTA
 #
+export AWS_USER=abrown
 alias okta-vpn='cd /home/austin/code/okta-vpn && sudo openvpn --config okta-vpc-dev.ovpn'
 alias okta-aws-sts-mfa='aws --profile aws-dmz-mfa sts get-session-token --serial-number "arn:aws:iam::153884899675:mfa/abrown" --token-code'
-export AWS_USER=abrown
 
 # ASA
 #
+export PAM_CHARTS_REPO_DIR=/home/austin/code/flo-infra/charts
+export ASA_DEVICE_TOOLS_REPO=/home/austin/code/asa/device-tools
 alias docker-login-asa='aws --profile azq-prod --region us-west-2 ecr get-login-password | docker login --username AWS --password-stdin 188514508768.dkr.ecr.us-west-2.amazonaws.com'
