@@ -145,7 +145,7 @@ alias p4thanos='kubectl port-forward -n monitoring $(kubectl get pods -n monitor
 # Minikube
 #
 #if [ -x "$(command -v minikube)" ]; then source <(minikube completion zsh); fi
-source $HOME/.minikube-completion
+if [ -f "$HOME/.minikube-completion" ]; then source $HOME/.minikube-completion; fi
 
 # DOCKER
 #
