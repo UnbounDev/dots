@@ -97,7 +97,7 @@ source $ZSH/oh-my-zsh.sh
 PROMPT=$PROMPT'$(kube_ps1) '
 
 # ALWAYS
-export EDITOR=/usr/bin/nvim
+export EDITOR=$(which nvim)
 
 # MISC
 alias top='htop'
