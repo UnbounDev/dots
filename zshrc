@@ -6,12 +6,15 @@
 export PATH="${PATH}:${HOME}/.local/bin"
 export PATH="${PATH}:${HOME}/.npm-global/bin"
 export PATH="${PATH}:${HOME}/.gem/ruby/2.5.0/bin"
+export PATH="${PATH}:${HOME}/.ruby/bin"
+export PATH="${PATH}:${HOME}/.rvm/bin"
 export PATH="${PATH}:${HOME}/.cargo/bin"
 export PATH="${PATH}:${HOME}/bin"
 export PATH="${PATH}:${HOME}/.local/bin"
 export PATH="${PATH}:${HOME}/.azuquactl"
 export PATH="${PATH}:/usr/local/go/bin"
 export PATH="${PATH}:${HOME}/code/go/bin"
+export PATH="${PATH}:${HOME}/google-cloud-sdk/bin"
 
 if [ -x "$(command -v yarn)" ]; then PATH="$PATH:`yarn global bin`"; fi
 
@@ -116,6 +119,7 @@ alias vim='nvim'
 
 # KEYS
 #
+export GPG_TTY=$(tty)
 alias gpg-add='gpg --keyserver keyserver.ubuntu.com --recv';
 
 # AZUQUACTL
@@ -173,8 +177,8 @@ if [ ! -d "$GOPATH" ]; then mkdir -p "$GOPATH"; fi
 
 # RUBY
 #
-export GEM_HOME="$HOME/.ruby"
-export PATH="$PATH:$HOME/.ruby/bin"
+#export GEM_HOME="$HOME/.ruby"
+#export PATH="$PATH:$HOME/.ruby/bin"
 
 # DOTNET
 #
@@ -196,9 +200,13 @@ if [ -x "$(command -v azuquactl)" ]; then source <(azuquactl completion zsh); fi
 export AWS_USER=abrown
 alias okta-vpn='cd /home/austin/code/okta-vpn && sudo openvpn --config okta-vpc-dev.ovpn'
 alias okta-aws-sts-mfa='aws --profile aws-dmz-mfa sts get-session-token --serial-number "arn:aws:iam::153884899675:mfa/abrown" --token-code'
+alias okta-aws-mfa='okta-aws-auth --use-cache -r 14400 -k'
 
 # ASA
 #
 export PAM_CHARTS_REPO_DIR=/home/austin/code/flo-infra/charts
 export ASA_DEVICE_TOOLS_REPO=/home/austin/code/asa/device-tools
 alias docker-login-asa='aws --profile azq-prod --region us-west-2 ecr get-login-password | docker login --username AWS --password-stdin 188514508768.dkr.ecr.us-west-2.amazonaws.com'
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
